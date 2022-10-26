@@ -1,61 +1,104 @@
-import React, { useState } from "react";
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import { useSelector, useDispatch } from "react-redux";
 import CatSprite from "../assests/CatSprite.svg";
+import { dragImageInPreview } from "./../actions/motionAction";
 
-const Canvas = (props) => {
-  const [x, setX] = useState(10);
-  const [y, setY] = useState(30);
-  const [rotate, setRotate] = useState(0);
+const useStyles = (props) =>
+  makeStyles(() => ({
+    previewParent: {
+      width: "100%",
+      height: "100%",
+      position: "relative",
+    },
+    imageStyles: {
+      width: "100%",
+      height: "100%",
+    },
+    catSpriteMovementStyles: {
+      position: "absolute",
+      left: `${props.xValue}px`,
+      top: `${props.yValue}px`,
+      transform: `rotate(${props.rotateValue}deg)`,
+      width: "100px",
+      height: "100px",
+    },
+  }));
 
-  function allowDrop(ev) {
-    ev.preventDefault();
+const Canvas = () => {
+  const { xValue, yValue, rotateValue } = useSelector((state) => {
+    return {
+      xValue: state.motionReducer.xValue,
+      yValue: state.motionReducer.yValue,
+      rotateValue: state.motionReducer.rotateValue,
+    };
+  });
+  const dispatch = useDispatch();
+  const classes = useStyles({ xValue, yValue, rotateValue })();
+
+  var pos1 = 0,
+    pos2 = 0,
+    pos3 = 0,
+    pos4 = 0;
+  let divContainerElement = null;
+  function dragMouseDown(e, id) {
+    divContainerElement = document.getElementById(id);
+    e = e || window.event;
+    e.preventDefault();
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    document.onmousemove = elementDrag;
   }
-  function drag(ev) {
-    ev.dataTransfer.setData("text", ev.target.id);
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    /*
+     * Calculating the positions of every coordinate relative to the preview window.
+     */
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+
+    let calculatedXValue = divContainerElement.offsetLeft - pos1;
+    let calculatedYValue = divContainerElement.offsetTop - pos2;
+    if (
+      calculatedXValue >= 10 &&
+      calculatedXValue <= 550 &&
+      calculatedYValue >= 10 &&
+      calculatedYValue <= 750
+    ) {
+      dispatch(
+        dragImageInPreview({
+          xValue: calculatedXValue,
+          yValue: calculatedYValue,
+        })
+      );
+    }
   }
-  function drop(ev) {
-    ev.preventDefault();
-    var data = ev.dataTransfer.getData("text");
-    ev.target.appendChild(document.getElementById(data));
+
+  function closeDragElement() {
+    document.onmouseup = null;
+    document.onmousemove = null;
   }
 
   return (
-    <div
-      style={{
-        width: "100%",
-        height: "100%",
-        position: "relative",
-      }}
-    >
-      <button
-        onClick={() => {
-          // if (x < 300) setX(x + 200);
-          // if (y < 600) setY(y + 200);
-          // setRotate(rotate - 10);
-        }}
-      >
-        Change coordinates
-      </button>
+    <div className={classes.previewParent}>
       <div
-        style={{
-          position: "absolute",
-          left: `${x}px`,
-          top: `${y}px`,
-          transform: `rotate(${rotate}deg)`,
-          width: "100px",
-          height: "100px",
-        }}
-        onDragOver={(e) => allowDrop(e)}
+        id="container-div"
+        className={classes.catSpriteMovementStyles}
+        onMouseDown={(e) => dragMouseDown(e, "container-div")}
       >
         <div>
-          {x}:{y}
+          {xValue}:{yValue}
         </div>
         <img
           id="CatSprite"
           src={CatSprite}
           alt="CatSprite"
-          style={{ width: "100%", height: "100%" }}
-          draggable="true"
-          onDragStart={(event) => drag(event)}
+          className={classes.imageStyles}
         />
       </div>
     </div>
