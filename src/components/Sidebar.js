@@ -1,10 +1,34 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import Icon from "./Icon";
 
 export default function Sidebar() {
+  const { xValue, yValue, rotateValue } = useSelector((state) => {
+    return {
+      xValue: state.motionReducer.xValue,
+      yValue: state.motionReducer.yValue,
+      rotateValue: state.motionReducer.rotateValue,
+    };
+  });
   return (
     <div className="w-60 flex-none h-full overflow-y-auto flex flex-col items-start p-2 border-r border-gray-200">
+      <div>
+        <div className="font-bold">Stats</div>
+        <div className="flex flex-row flex-wrap text-black px-2 py-1 my-2 text-sm">
+          X Coordinates : {xValue}
+        </div>
+        <div className="flex flex-row flex-wrap text-black px-2 py-1 my-2 text-sm">
+          Y Coordinates : {yValue}
+        </div>
+        <div className="flex flex-row flex-wrap text-black px-2 py-1 my-2 text-sm">
+          Rotate Degree : {rotateValue}
+        </div>
+      </div>
       <div className="font-bold"> {"Motion"} </div>
+
+      <div className="flex flex-row flex-wrap bg-blue-500 text-white px-2 py-1 my-2 text-sm cursor-pointer">
+        {"Move 10 steps"}
+      </div>
       <div className="flex flex-row flex-wrap bg-blue-500 text-white px-2 py-1 my-2 text-sm cursor-pointer">
         {"Move 10 steps"}
       </div>
