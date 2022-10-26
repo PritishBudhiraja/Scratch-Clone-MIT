@@ -67,7 +67,7 @@ const Canvas = () => {
     if (
       calculatedXValue >= 10 &&
       calculatedXValue <= 550 &&
-      calculatedYValue >= 10 &&
+      calculatedYValue >= 40 &&
       calculatedYValue <= 750
     ) {
       dispatch(
@@ -86,6 +86,9 @@ const Canvas = () => {
 
   return (
     <div className={classes.previewParent}>
+      <div className="font-bold mb-5 w-1/4 text-center rounded text-black-400 p-2">
+        Preview Area
+      </div>
       <div
         id="container-div"
         className={classes.catSpriteMovementStyles}

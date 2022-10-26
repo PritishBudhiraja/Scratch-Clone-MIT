@@ -11,7 +11,7 @@ import {
 
 const initialState = {
   xValue: 10,
-  yValue: 10,
+  yValue: 40,
   rotateValue: 0,
 };
 export const motionReducer = (state = initialState, { payload, type }) => {

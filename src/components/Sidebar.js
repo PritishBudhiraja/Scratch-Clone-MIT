@@ -29,6 +29,7 @@ export default function Sidebar() {
   const dispatch = useDispatch();
   return (
     <div className="w-60 flex-none h-full overflow-y-auto flex flex-col items-start p-2 border-r border-gray-200">
+      <div className="font-bold rounded text-black-400 p-2">Side Bar</div>
       <div>
         <div className="font-bold">Stats</div>
         <div className="flex flex-row flex-wrap text-black px-2 py-1 my-2 text-sm">
