@@ -91,9 +91,6 @@ const Canvas = () => {
         className={classes.catSpriteMovementStyles}
         onMouseDown={(e) => dragMouseDown(e, "container-div")}
       >
-        <div>
-          {xValue}:{yValue}
-        </div>
         <img
           id="CatSprite"
           src={CatSprite}
