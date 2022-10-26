@@ -86,7 +86,7 @@ const Canvas = () => {
 
   return (
     <div className={classes.previewParent}>
-      <div className="font-bold mb-5 w-1/4 text-center rounded text-black-400 p-2">
+      <div className="font-bold mb-5 rounded text-black-400 p-2">
         Preview Area
       </div>
       <div

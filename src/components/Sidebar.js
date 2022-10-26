@@ -41,6 +41,12 @@ export default function Sidebar() {
         <div className="flex flex-row flex-wrap text-black px-2 py-1 my-2 text-sm">
           Rotate Degree : {rotateValue}
         </div>
+        <div className="flex flex-row flex-wrap text-black px-2 py-1 my-2 text-sm">
+          Show : True
+        </div>
+        <div className="flex flex-row flex-wrap text-black px-2 py-1 my-2 text-sm">
+          Size : 0
+        </div>
       </div>
       <div className="font-bold mb-5"> {"Motion"} </div>
 
