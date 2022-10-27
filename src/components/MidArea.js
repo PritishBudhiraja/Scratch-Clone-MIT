@@ -90,7 +90,7 @@ export default function MidArea() {
   };
 
   return (
-    <div className="flex-1 h-full">
+    <div className="flex-1 h-full overflow-auto">
       <div className="flex items-center justify-between m-3">
         <div className="font-bold rounded text-black-400 p-2">Mid Area</div>
         <Button variant="outlined" color="primary" onClick={() => addStack()}>
