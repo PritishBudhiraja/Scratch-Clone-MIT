@@ -7,12 +7,22 @@ import {
   ROTATE_RIGHT,
   ROTATE_LEFT,
   RESET_POSITIONS,
+  UPDATE_MOTION_ORDER,
 } from "../actions/actionTypes";
 
 const initialState = {
   xValue: 10,
   yValue: 40,
   rotateValue: 0,
+  motionsStateSequence: [
+    "MOVEUP",
+    "MOVEDOWN",
+    "MOVELEFT",
+    "MOVERIGHT",
+    "ROTATELEFT",
+    "ROTATERIGHT",
+    "RESET",
+  ],
 };
 export const motionReducer = (state = initialState, { payload, type }) => {
   switch (type) {
@@ -54,6 +64,12 @@ export const motionReducer = (state = initialState, { payload, type }) => {
       };
     case RESET_POSITIONS: {
       return { ...initialState };
+    }
+    case UPDATE_MOTION_ORDER: {
+      return {
+        ...state,
+        motionsStateSequence: [...payload.motionsStateSequence],
+      };
     }
     default:
       return state;

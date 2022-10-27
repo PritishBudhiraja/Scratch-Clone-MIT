@@ -7,6 +7,8 @@ import {
   ROTATE_LEFT,
   ROTATE_RIGHT,
   RESET_POSITIONS,
+  UPDATE_MOTION_ORDER,
+  MID_AREA_STACK_UPDATION,
 } from "./actionTypes";
 
 export const dragImageInPreview = (payload) => ({
@@ -46,4 +48,14 @@ export const rotateRight = (payload) => ({
 
 export const resetPositions = () => ({
   type: RESET_POSITIONS,
+});
+
+export const updateMotionOrder = (payload) => ({
+  type: UPDATE_MOTION_ORDER,
+  payload,
+});
+
+export const midAreaStackUpdation = (payload) => ({
+  type: MID_AREA_STACK_UPDATION,
+  payload,
 });
