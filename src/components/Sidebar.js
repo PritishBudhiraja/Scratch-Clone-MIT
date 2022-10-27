@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import { getComponent } from "./utils/getComponent";
+import OnKeyEvent from "./sidebarComponents/eventsComponents/OnKeyEvent";
 
 export default function Sidebar() {
   const {
@@ -51,7 +52,8 @@ export default function Sidebar() {
           }`}
         </div>
       </div>
-      <div className="font-bold mb-5"> {"Motion"} </div>
+
+      <div className="font-bold mb-3"> {"Motion"} </div>
       <Droppable droppableId={"SIDEBAR-MOTIONS"}>
         {(provided) => (
           <div {...provided.droppableProps} ref={provided.innerRef}>
@@ -80,8 +82,8 @@ export default function Sidebar() {
           </div>
         )}
       </Droppable>
-      <div className="font-bold"> {"Looks"} </div>
 
+      <div className="font-bold"> {"Looks"} </div>
       <Droppable droppableId={"SIDEBAR-LOOKS"}>
         {(provided) => (
           <div {...provided.droppableProps} ref={provided.innerRef}>
@@ -110,6 +112,17 @@ export default function Sidebar() {
           </div>
         )}
       </Droppable>
+
+      <div className="font-bold mb-3"> {"Events"} </div>
+      <OnKeyEvent />
+      <div className="mb-5 bg-green-500 opacity-70 rounded p-1 m-1">
+        <div className="mb-2"> {"On Press of Following Keys - "} </div>
+        <div className="mb-2"> {"Space - Key - Rotate 10 Degrees Left"} </div>
+        <div className="mb-2"> {"W - Key - Move 10 steps Up"} </div>
+        <div className="mb-2"> {"A - Key - Move 10 steps Left"} </div>
+        <div className="mb-2"> {"X - Key - Move 10 steps Down"} </div>
+        <div className="mb-2"> {"D - Key - Move 10 steps Right"} </div>
+      </div>
     </div>
   );
 }
